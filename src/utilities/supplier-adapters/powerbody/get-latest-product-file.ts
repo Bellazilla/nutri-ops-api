@@ -25,7 +25,7 @@ export const getLatestProductFile = async () => {
       downloadPath: './test-folder',
     });
 
-    await page.waitForNetworkIdle(); // Wait until the download is complete
+    await page.waitForTimeout(30000); // Wait until the download is complete
   } catch (e) {
     console.error(
       'something went wrong while getting latest powerbody file',

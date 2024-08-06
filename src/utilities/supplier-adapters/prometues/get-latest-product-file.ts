@@ -12,14 +12,14 @@ export const getLatestProductFile = async () => {
     await page.goto('https://www.prometeus.nl/i/downloads.html');
     // Log in
     await page.click('#btnUserMenu');
-    await page.waitForSelector('#txtUserName_new');
+    await page.waitForTimeout(3000);
     await page.type('#txtUserName_new', 'info@nutri.se');
     await page.type('#txtPassword_new', 'Sonysony2022!');
     await page.click('#btnSubmitLogin_new');
 
     await page.waitForNavigation();
 
-    const downloadButton = await page.$("//a[contains(., 'Click here')]");
+    const [downloadButton] = await page.$x("//a[contains(., 'Click here')]");
     if (downloadButton) {
       await (downloadButton as any).click();
     }
@@ -30,7 +30,7 @@ export const getLatestProductFile = async () => {
       downloadPath: './test-folder/prometeus',
     });
 
-    await page.waitForNetworkIdle(); // Wait until the download is complete
+    await page.waitForTimeout(30000); // Wait until the download is complete
   } catch (e) {
     console.error(
       'something went wrong while getting latest prometeus file',
